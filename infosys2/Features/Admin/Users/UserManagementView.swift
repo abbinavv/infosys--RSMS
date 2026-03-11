@@ -63,7 +63,7 @@ struct UserManagementView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showCreateUser = true }) {
                         Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 20))
+                            .font(AppTypography.toolbarIcon)
                             .foregroundColor(AppColors.accent)
                     }
                 }
@@ -165,7 +165,7 @@ struct UserManagementView: View {
 
                     if !user.isActive {
                         Text("INACTIVE")
-                            .font(.system(size: 9, weight: .bold))
+                            .font(AppTypography.nano)
                             .foregroundColor(AppColors.error)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 1)
@@ -204,7 +204,7 @@ struct UserManagementView: View {
                 }
             } label: {
                 Image(systemName: "ellipsis")
-                    .font(.system(size: 16))
+                    .font(AppTypography.iconMedium)
                     .foregroundColor(AppColors.neutral500)
                     .frame(width: AppSpacing.touchTarget, height: AppSpacing.touchTarget)
             }
@@ -220,7 +220,7 @@ struct UserManagementView: View {
         VStack(spacing: AppSpacing.lg) {
             Spacer()
             Image(systemName: "person.2.slash")
-                .font(.system(size: 40, weight: .light))
+                .font(AppTypography.emptyStateIcon)
                 .foregroundColor(AppColors.neutral600)
             Text("No users found")
                 .font(AppTypography.heading3)
@@ -343,7 +343,7 @@ struct CreateUserSheet: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(AppTypography.closeButton)
                             .foregroundColor(AppColors.textPrimaryDark)
                     }
                 }

@@ -73,7 +73,7 @@ struct ManagerOperationsView: View {
     private func txnRow(id: String, customer: String, items: String, amount: String, time: String, associate: String) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
             HStack {
-                Text(id).font(.system(size: 10, weight: .semibold, design: .monospaced)).foregroundColor(AppColors.neutral500)
+                Text(id).font(AppTypography.monoID).foregroundColor(AppColors.neutral500)
                 Spacer()
                 Text(time).font(AppTypography.caption).foregroundColor(AppColors.neutral500)
             }
@@ -81,7 +81,7 @@ struct ManagerOperationsView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(customer).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                     Text(items).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark).lineLimit(1)
-                    Text(associate).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.purple)
+                    Text(associate).font(AppTypography.micro).foregroundColor(AppColors.purple)
                 }
                 Spacer()
                 Text(amount).font(AppTypography.label).foregroundColor(AppColors.accent)
@@ -123,7 +123,7 @@ struct ManagerOperationsView: View {
                 Text(sku).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                 Spacer()
                 let statusColor = status == "Pending" ? AppColors.warning : AppColors.success
-                Text(status.uppercased()).font(.system(size: 9, weight: .bold)).foregroundColor(statusColor)
+                Text(status.uppercased()).font(AppTypography.nano).foregroundColor(statusColor)
                     .padding(.horizontal, 8).padding(.vertical, 3).background(statusColor.opacity(0.12)).cornerRadius(4)
             }
             HStack(spacing: AppSpacing.xl) {
@@ -147,7 +147,7 @@ struct ManagerOperationsView: View {
                 Spacer()
                 if status == "Pending" {
                     Button(action: {}) {
-                        Text("Approve").font(.system(size: 11, weight: .semibold)).foregroundColor(AppColors.accent)
+                        Text("Approve").font(AppTypography.actionSmall).foregroundColor(AppColors.accent)
                             .padding(.horizontal, 12).padding(.vertical, 5)
                             .background(AppColors.accent.opacity(0.12)).cornerRadius(6)
                     }
@@ -189,7 +189,7 @@ struct ManagerOperationsView: View {
                 }
                 Spacer()
                 let sc = status == "Confirmed" ? AppColors.success : AppColors.warning
-                Text(status.uppercased()).font(.system(size: 9, weight: .bold)).foregroundColor(sc)
+                Text(status.uppercased()).font(AppTypography.nano).foregroundColor(sc)
                     .padding(.horizontal, 8).padding(.vertical, 3).background(sc.opacity(0.12)).cornerRadius(4)
             }
             Divider().background(AppColors.border)
@@ -236,10 +236,10 @@ struct ManagerOperationsView: View {
                 HStack {
                     Text(action).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                     Spacer()
-                    Text(time).font(.system(size: 10)).foregroundColor(AppColors.neutral500)
+                    Text(time).font(AppTypography.iconCompact).foregroundColor(AppColors.neutral500)
                 }
                 Text(detail).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark).lineLimit(1)
-                Text(by).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.purple)
+                Text(by).font(AppTypography.micro).foregroundColor(AppColors.purple)
             }
         }
         .padding(.horizontal, AppSpacing.sm).padding(.vertical, AppSpacing.xs + 2)
@@ -250,7 +250,7 @@ struct ManagerOperationsView: View {
     private func miniStat(value: String, label: String, color: Color) -> some View {
         VStack(spacing: 4) {
             Text(value).font(AppTypography.heading2).foregroundColor(color)
-            Text(label).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.textSecondaryDark)
+            Text(label).font(AppTypography.micro).foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity).padding(.vertical, AppSpacing.sm)
         .background(AppColors.backgroundSecondary).cornerRadius(AppSpacing.radiusMedium)

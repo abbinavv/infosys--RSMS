@@ -46,7 +46,7 @@ struct InsightsView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
                         Image(systemName: "square.and.arrow.up")
-                            .font(.system(size: 16))
+                            .font(AppTypography.iconMedium)
                             .foregroundColor(AppColors.accent)
                     }
                 }
@@ -87,7 +87,7 @@ struct InsightsAnalyticsSubview: View {
                         .font(AppTypography.displayLarge)
                         .foregroundColor(AppColors.textPrimaryDark)
                     HStack(spacing: 4) {
-                        Image(systemName: "arrow.up.right").font(.system(size: 12, weight: .bold)).foregroundColor(AppColors.success)
+                        Image(systemName: "arrow.up.right").font(AppTypography.trendArrow).foregroundColor(AppColors.success)
                         Text("+12.5% vs last period").font(AppTypography.caption).foregroundColor(AppColors.success)
                     }
                 }
@@ -202,14 +202,14 @@ struct InsightsReportsSubview: View {
         HStack(spacing: AppSpacing.md) {
             ZStack {
                 RoundedRectangle(cornerRadius: AppSpacing.radiusSmall).fill(color.opacity(0.12)).frame(width: 40, height: 40)
-                Image(systemName: icon).font(.system(size: 16)).foregroundColor(color)
+                Image(systemName: icon).font(AppTypography.iconMedium).foregroundColor(color)
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text(title).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                 Text(sub).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
             }
             Spacer()
-            Image(systemName: "chevron.right").font(.system(size: 12)).foregroundColor(AppColors.neutral600)
+            Image(systemName: "chevron.right").font(AppTypography.chevron).foregroundColor(AppColors.neutral600)
         }
         .padding(AppSpacing.sm)
         .background(AppColors.backgroundSecondary)
@@ -274,7 +274,7 @@ struct InsightsComplianceSubview: View {
     private func complianceStat(value: String, label: String, color: Color) -> some View {
         VStack(spacing: 4) {
             Text(value).font(AppTypography.heading3).foregroundColor(color)
-            Text(label).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.textSecondaryDark)
+            Text(label).font(AppTypography.micro).foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, AppSpacing.md)
@@ -285,10 +285,10 @@ struct InsightsComplianceSubview: View {
     private func auditRow(check: String, status: String, color: Color) -> some View {
         HStack(spacing: AppSpacing.sm) {
             Image(systemName: status == "Passed" ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
-                .font(.system(size: 14)).foregroundColor(color)
+                .font(AppTypography.complianceIcon).foregroundColor(color)
             Text(check).font(AppTypography.bodySmall).foregroundColor(AppColors.textPrimaryDark)
             Spacer()
-            Text(status.uppercased()).font(.system(size: 9, weight: .bold)).foregroundColor(color)
+            Text(status.uppercased()).font(AppTypography.nano).foregroundColor(color)
                 .padding(.horizontal, 8).padding(.vertical, 3).background(color.opacity(0.12)).cornerRadius(4)
         }
         .padding(AppSpacing.sm)
@@ -307,7 +307,7 @@ struct InsightsComplianceSubview: View {
                 }
             }
             Spacer()
-            Text(time).font(.system(size: 10)).foregroundColor(AppColors.neutral500)
+            Text(time).font(AppTypography.iconCompact).foregroundColor(AppColors.neutral500)
         }
         .padding(AppSpacing.sm)
         .background(AppColors.backgroundSecondary)

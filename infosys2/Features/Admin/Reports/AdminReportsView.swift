@@ -51,7 +51,7 @@ struct AdminReportsView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
                         Image(systemName: "square.and.arrow.up")
-                            .font(.system(size: 16))
+                            .font(AppTypography.iconMedium)
                             .foregroundColor(AppColors.accent)
                     }
                 }
@@ -99,7 +99,7 @@ struct AdminReportsView: View {
                         .foregroundColor(AppColors.textPrimaryDark)
                     HStack(spacing: AppSpacing.xs) {
                         Image(systemName: "arrow.up.right")
-                            .font(.system(size: 12, weight: .bold))
+                            .font(AppTypography.trendArrow)
                             .foregroundColor(AppColors.success)
                         Text("+12.5% vs last period")
                             .font(AppTypography.caption)
@@ -264,7 +264,7 @@ struct AdminReportsView: View {
                     .fill(AppColors.purple.opacity(0.15))
                     .frame(width: 40, height: 40)
                 Image(systemName: icon)
-                    .font(.system(size: 16))
+                    .font(AppTypography.iconMedium)
                     .foregroundColor(AppColors.purple)
             }
 
@@ -280,7 +280,7 @@ struct AdminReportsView: View {
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .medium))
+                .font(AppTypography.chevron)
                 .foregroundColor(AppColors.neutral600)
         }
         .padding(AppSpacing.sm)

@@ -76,7 +76,7 @@ struct CustomerSignUpView: View {
                         // Password hint
                         HStack {
                             Image(systemName: "info.circle")
-                                .font(.system(size: 12))
+                                .font(AppTypography.infoIcon)
                             Text("Minimum 6 characters")
                                 .font(AppTypography.caption)
                         }
@@ -111,7 +111,7 @@ struct CustomerSignUpView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(AppTypography.closeButton)
                             .foregroundColor(AppColors.textPrimaryDark)
                     }
                 }

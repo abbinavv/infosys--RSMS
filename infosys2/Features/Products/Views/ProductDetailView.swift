@@ -25,7 +25,7 @@ struct ProductDetailView: View {
                             .frame(height: 380)
 
                         Image(systemName: product.imageName)
-                            .font(.system(size: 80, weight: .ultraLight))
+                            .font(AppTypography.iconDecorative)
                             .foregroundColor(AppColors.neutral600)
 
                         // Limited Edition overlay
@@ -66,7 +66,7 @@ struct ProductDetailView: View {
                             HStack(spacing: AppSpacing.xxs) {
                                 ForEach(0..<5) { index in
                                     Image(systemName: index < Int(product.rating) ? "star.fill" : "star")
-                                        .font(.system(size: 12))
+                                        .font(AppTypography.starRating)
                                         .foregroundColor(AppColors.accent)
                                 }
                                 Text(String(format: "%.1f", product.rating))
@@ -149,7 +149,7 @@ struct ProductDetailView: View {
                         }
                     }) {
                         Image(systemName: product.isWishlisted ? "heart.fill" : "heart")
-                            .font(.system(size: 20))
+                            .font(AppTypography.toolbarIcon)
                             .foregroundColor(product.isWishlisted ? AppColors.error : AppColors.textPrimaryDark)
                             .frame(width: AppSpacing.touchTarget + 8, height: AppSpacing.touchTarget + 8)
                             .background(AppColors.backgroundTertiary)

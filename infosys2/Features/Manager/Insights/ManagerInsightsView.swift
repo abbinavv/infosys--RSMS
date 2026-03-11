@@ -42,7 +42,7 @@ struct ManagerInsightsView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
-                        Image(systemName: "square.and.arrow.up").font(.system(size: 16)).foregroundColor(AppColors.accent)
+                        Image(systemName: "square.and.arrow.up").font(AppTypography.bellIcon).foregroundColor(AppColors.accent)
                     }
                 }
             }
@@ -80,7 +80,7 @@ struct MgrRevenueSubview: View {
                     Text("$248,600")
                         .font(AppTypography.displayLarge).foregroundColor(AppColors.textPrimaryDark)
                     HStack(spacing: 4) {
-                        Image(systemName: "arrow.up.right").font(.system(size: 12, weight: .bold)).foregroundColor(AppColors.success)
+                        Image(systemName: "arrow.up.right").font(AppTypography.trendArrow).foregroundColor(AppColors.success)
                         Text("+8.2% vs last month").font(AppTypography.caption).foregroundColor(AppColors.success)
                     }
                 }
@@ -181,7 +181,7 @@ struct MgrProductInsightsSubview: View {
                         Text(p.name).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark).lineLimit(1)
                         Spacer()
                         Text("\(p.stockCount) units").font(AppTypography.caption).foregroundColor(AppColors.neutral500)
-                        Text("Low demand").font(.system(size: 9, weight: .bold)).foregroundColor(AppColors.warning)
+                        Text("Low demand").font(AppTypography.demandBadge).foregroundColor(AppColors.warning)
                             .padding(.horizontal, 6).padding(.vertical, 2).background(AppColors.warning.opacity(0.12)).cornerRadius(4)
                     }
                     .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -260,7 +260,7 @@ struct MgrStaffInsightsSubview: View {
             Text(name).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
             Spacer()
             Text(rate).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
-            Text(trend).font(.system(size: 10, weight: .bold)).foregroundColor(positive ? AppColors.success : AppColors.error)
+            Text(trend).font(AppTypography.trendBadge).foregroundColor(positive ? AppColors.success : AppColors.error)
                 .padding(.horizontal, 6).padding(.vertical, 2)
                 .background((positive ? AppColors.success : AppColors.error).opacity(0.12)).cornerRadius(4)
         }
@@ -273,7 +273,7 @@ struct MgrStaffInsightsSubview: View {
             Spacer()
             Text("\(present)/\(total) days").font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
             if late > 0 {
-                Text("\(late) late").font(.system(size: 9, weight: .bold)).foregroundColor(AppColors.warning)
+                Text("\(late) late").font(AppTypography.demandBadge).foregroundColor(AppColors.warning)
                     .padding(.horizontal, 6).padding(.vertical, 2).background(AppColors.warning.opacity(0.12)).cornerRadius(4)
             }
         }

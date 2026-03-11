@@ -102,7 +102,7 @@ struct ProductManagementView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showCreateProduct = true }) {
                         Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 20))
+                            .font(AppTypography.toolbarIcon)
                             .foregroundColor(AppColors.accent)
                     }
                 }
@@ -133,7 +133,7 @@ struct ProductManagementView: View {
                     .fill(AppColors.backgroundTertiary)
                     .frame(width: 50, height: 50)
                 Image(systemName: product.imageName)
-                    .font(.system(size: 18, weight: .light))
+                    .font(AppTypography.catalogIcon)
                     .foregroundColor(AppColors.neutral600)
             }
 
@@ -151,7 +151,7 @@ struct ProductManagementView: View {
 
                     if product.isLimitedEdition {
                         Text("LIMITED")
-                            .font(.system(size: 8, weight: .bold))
+                            .font(AppTypography.pico)
                             .foregroundColor(AppColors.accent)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 1)
@@ -200,7 +200,7 @@ struct ProductManagementView: View {
                 }
             } label: {
                 Image(systemName: "ellipsis")
-                    .font(.system(size: 14))
+                    .font(AppTypography.alertIcon)
                     .foregroundColor(AppColors.neutral500)
                     .frame(width: 32, height: AppSpacing.touchTarget)
             }
@@ -303,7 +303,7 @@ struct CreateProductSheet: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(AppTypography.closeButton)
                             .foregroundColor(AppColors.textPrimaryDark)
                     }
                 }

@@ -79,7 +79,7 @@ struct CategoriesView: View {
                         .frame(width: 70, height: 70)
 
                     Image(systemName: category.icon)
-                        .font(.system(size: 28, weight: .light))
+                        .font(AppTypography.iconCategory)
                         .foregroundStyle(
                             LinearGradient(
                                 colors: [AppColors.accent, AppColors.accentLight],

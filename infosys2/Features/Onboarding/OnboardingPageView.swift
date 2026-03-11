@@ -55,7 +55,7 @@ struct OnboardingPageView: View {
 
                 // Icon
                 Image(systemName: data.icon)
-                    .font(.system(size: 48, weight: .light))
+                    .font(AppTypography.iconHero)
                     .foregroundStyle(
                         LinearGradient(
                             colors: [AppColors.accent, AppColors.accentLight],

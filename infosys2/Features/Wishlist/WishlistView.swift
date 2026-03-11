@@ -78,7 +78,7 @@ struct WishlistView: View {
                     .frame(width: 100, height: 100)
 
                 Image(systemName: "heart")
-                    .font(.system(size: 40, weight: .light))
+                    .font(AppTypography.emptyStateIcon)
                     .foregroundColor(AppColors.accent.opacity(0.5))
             }
 
@@ -106,7 +106,7 @@ struct WishlistView: View {
                     .frame(width: 90, height: 90)
 
                 Image(systemName: product.imageName)
-                    .font(.system(size: 28, weight: .light))
+                    .font(AppTypography.iconCategory)
                     .foregroundColor(AppColors.neutral600)
             }
 
@@ -145,7 +145,7 @@ struct WishlistView: View {
                 }
             }) {
                 Image(systemName: "heart.fill")
-                    .font(.system(size: 16))
+                    .font(AppTypography.heartIcon)
                     .foregroundColor(AppColors.error)
             }
         }

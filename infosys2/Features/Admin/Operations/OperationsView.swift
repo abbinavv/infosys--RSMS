@@ -57,7 +57,7 @@ struct OperationsView: View {
                         Button(action: {}) { Label("Export Inventory", systemImage: "square.and.arrow.up") }
                     } label: {
                         Image(systemName: "ellipsis.circle")
-                            .font(.system(size: 16))
+                            .font(AppTypography.iconMedium)
                             .foregroundColor(AppColors.accent)
                     }
                 }
@@ -112,7 +112,7 @@ struct OperationsView: View {
                 .font(AppTypography.heading2)
                 .foregroundColor(color)
             Text(label)
-                .font(.system(size: 10, weight: .medium))
+                .font(AppTypography.micro)
                 .foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity)
@@ -139,7 +139,7 @@ struct OperationsView: View {
             Spacer()
 
             Text(product.stockCount == 0 ? "OUT" : "\(product.stockCount) left")
-                .font(.system(size: 11, weight: .bold))
+                .font(AppTypography.statSmall)
                 .foregroundColor(product.stockCount == 0 ? AppColors.error : AppColors.warning)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
@@ -148,7 +148,7 @@ struct OperationsView: View {
 
             Button(action: {}) {
                 Text("Reorder")
-                    .font(.system(size: 11, weight: .medium))
+                    .font(AppTypography.actionLink)
                     .foregroundColor(AppColors.accent)
             }
         }
@@ -165,7 +165,7 @@ struct OperationsView: View {
                     .fill(AppColors.backgroundTertiary)
                     .frame(width: 40, height: 40)
                 Image(systemName: product.imageName)
-                    .font(.system(size: 14))
+                    .font(AppTypography.inventoryIcon)
                     .foregroundColor(AppColors.neutral600)
             }
 
@@ -188,7 +188,7 @@ struct OperationsView: View {
     private func stockBadge(_ count: Int) -> some View {
         let color = count > 5 ? AppColors.success : count > 0 ? AppColors.warning : AppColors.error
         return Text("\(count)")
-            .font(.system(size: 12, weight: .semibold))
+            .font(AppTypography.editLink)
             .foregroundColor(color)
             .frame(width: 32)
     }
@@ -226,7 +226,7 @@ struct OperationsView: View {
                 }
                 Spacer()
                 Text(status.uppercased())
-                    .font(.system(size: 9, weight: .bold))
+                    .font(AppTypography.nano)
                     .foregroundColor(AppColors.success)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
@@ -253,7 +253,7 @@ struct OperationsView: View {
                         .foregroundColor(AppColors.textSecondaryDark)
                     Spacer()
                     Text("\(Int(percent * 100))%")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(AppTypography.statSmall)
                         .foregroundColor(AppColors.accent)
                 }
             }
@@ -304,7 +304,7 @@ struct OperationsView: View {
                         .font(AppTypography.caption)
                         .foregroundColor(AppColors.textSecondaryDark)
                     Image(systemName: "arrow.right")
-                        .font(.system(size: 8))
+                        .font(AppTypography.arrowInline)
                         .foregroundColor(AppColors.neutral500)
                     Text(to)
                         .font(AppTypography.caption)
@@ -318,7 +318,7 @@ struct OperationsView: View {
                 .foregroundColor(AppColors.textPrimaryDark)
 
             Text(status.uppercased())
-                .font(.system(size: 9, weight: .bold))
+                .font(AppTypography.nano)
                 .foregroundColor(color)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 3)

@@ -48,7 +48,7 @@ struct CatalogView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
                         Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 20))
+                            .font(AppTypography.toolbarIcon)
                             .foregroundColor(AppColors.accent)
                     }
                 }
@@ -127,14 +127,14 @@ struct CatalogProductsSubview: View {
         HStack(spacing: AppSpacing.sm) {
             ZStack {
                 RoundedRectangle(cornerRadius: 6).fill(AppColors.backgroundTertiary).frame(width: 44, height: 44)
-                Image(systemName: product.imageName).font(.system(size: 16, weight: .light)).foregroundColor(AppColors.neutral600)
+                Image(systemName: product.imageName).font(AppTypography.productRowIcon).foregroundColor(AppColors.neutral600)
             }
 
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 4) {
                     Text(product.name).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark).lineLimit(1)
                     if product.isLimitedEdition {
-                        Text("LTD").font(.system(size: 8, weight: .bold)).foregroundColor(AppColors.accent)
+                        Text("LTD").font(AppTypography.pico).foregroundColor(AppColors.accent)
                             .padding(.horizontal, 4).padding(.vertical, 1).background(AppColors.accent.opacity(0.15)).cornerRadius(3)
                     }
                 }
@@ -156,7 +156,7 @@ struct CatalogProductsSubview: View {
                     Label("Delete", systemImage: "trash")
                 }
             } label: {
-                Image(systemName: "ellipsis").font(.system(size: 14)).foregroundColor(AppColors.neutral500)
+                Image(systemName: "ellipsis").font(AppTypography.iconSmall).foregroundColor(AppColors.neutral500)
                     .frame(width: 28, height: AppSpacing.touchTarget)
             }
         }
@@ -198,7 +198,7 @@ struct CatalogCategoriesSubview: View {
                     HStack(spacing: AppSpacing.md) {
                         ZStack {
                             Circle().fill(AppColors.accent.opacity(0.12)).frame(width: 44, height: 44)
-                            Image(systemName: cat.icon).font(.system(size: 18, weight: .light)).foregroundColor(AppColors.accent)
+                            Image(systemName: cat.icon).font(AppTypography.catalogIcon).foregroundColor(AppColors.accent)
                         }
                         VStack(alignment: .leading, spacing: 2) {
                             Text(cat.name).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
@@ -206,7 +206,7 @@ struct CatalogCategoriesSubview: View {
                         }
                         Spacer()
                         Text("\(count) SKUs").font(AppTypography.caption).foregroundColor(AppColors.accent)
-                        Image(systemName: "chevron.right").font(.system(size: 12)).foregroundColor(AppColors.neutral600)
+                        Image(systemName: "chevron.right").font(AppTypography.chevron).foregroundColor(AppColors.neutral600)
                     }
                     .padding(AppSpacing.sm)
                     .background(AppColors.backgroundSecondary)
@@ -244,14 +244,14 @@ struct CatalogPricingSubview: View {
     private func pricingCard(title: String, subtitle: String, icon: String, items: [String]) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
             HStack(spacing: AppSpacing.sm) {
-                Image(systemName: icon).font(.system(size: 16)).foregroundColor(AppColors.accent)
+                Image(systemName: icon).font(AppTypography.iconMedium).foregroundColor(AppColors.accent)
                 VStack(alignment: .leading, spacing: 1) {
                     Text(title).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                     Text(subtitle).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
                 }
                 Spacer()
                 Button(action: {}) {
-                    Text("Edit").font(.system(size: 12, weight: .medium)).foregroundColor(AppColors.accent)
+                    Text("Edit").font(AppTypography.editLink).foregroundColor(AppColors.accent)
                 }
             }
             Divider().background(AppColors.border)
@@ -291,13 +291,13 @@ struct CatalogPromotionsSubview: View {
             HStack {
                 Text(name).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                 Spacer()
-                Text(status.uppercased()).font(.system(size: 9, weight: .bold)).foregroundColor(color)
+                Text(status.uppercased()).font(AppTypography.nano).foregroundColor(color)
                     .padding(.horizontal, 8).padding(.vertical, 3).background(color.opacity(0.12)).cornerRadius(4)
             }
             Text(discount).font(AppTypography.bodySmall).foregroundColor(AppColors.textSecondaryDark)
             HStack(spacing: AppSpacing.md) {
                 Label(start, systemImage: "calendar").font(AppTypography.caption).foregroundColor(AppColors.neutral500)
-                Image(systemName: "arrow.right").font(.system(size: 8)).foregroundColor(AppColors.neutral600)
+                Image(systemName: "arrow.right").font(AppTypography.arrowInline).foregroundColor(AppColors.neutral600)
                 Label(end, systemImage: "calendar").font(AppTypography.caption).foregroundColor(AppColors.neutral500)
             }
         }

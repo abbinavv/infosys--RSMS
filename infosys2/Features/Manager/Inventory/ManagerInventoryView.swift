@@ -48,7 +48,7 @@ struct ManagerInventoryView: View {
                         Button(action: {}) { Label("Start Count", systemImage: "checklist") }
                         Button(action: {}) { Label("Flag Item", systemImage: "exclamationmark.bubble") }
                     } label: {
-                        Image(systemName: "ellipsis.circle").font(.system(size: 16)).foregroundColor(AppColors.accent)
+                        Image(systemName: "ellipsis.circle").font(AppTypography.iconMedium).foregroundColor(AppColors.accent)
                     }
                 }
             }
@@ -104,7 +104,7 @@ struct InvStockSubview: View {
         HStack(spacing: AppSpacing.sm) {
             ZStack {
                 RoundedRectangle(cornerRadius: 6).fill(AppColors.backgroundTertiary).frame(width: 40, height: 40)
-                Image(systemName: product.imageName).font(.system(size: 14)).foregroundColor(AppColors.neutral600)
+                Image(systemName: product.imageName).font(AppTypography.inventoryIcon).foregroundColor(AppColors.neutral600)
             }
             VStack(alignment: .leading, spacing: 1) {
                 Text(product.name).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark).lineLimit(1)
@@ -119,14 +119,14 @@ struct InvStockSubview: View {
     private func stockBadge(_ count: Int) -> some View {
         let color = count > 5 ? AppColors.success : count > 0 ? AppColors.warning : AppColors.error
         let label = count == 0 ? "OUT" : "\(count)"
-        return Text(label).font(.system(size: 12, weight: .semibold)).foregroundColor(color)
+        return Text(label).font(AppTypography.editLink).foregroundColor(color)
             .frame(width: 36).padding(.vertical, 3).background(color.opacity(0.12)).cornerRadius(4)
     }
 
     private func invStat(value: String, label: String, color: Color) -> some View {
         VStack(spacing: 4) {
             Text(value).font(AppTypography.heading3).foregroundColor(color)
-            Text(label).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.textSecondaryDark)
+            Text(label).font(AppTypography.micro).foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity).padding(.vertical, AppSpacing.sm)
         .background(AppColors.backgroundSecondary).cornerRadius(AppSpacing.radiusMedium)
@@ -146,7 +146,7 @@ struct InvAlertsSubview: View {
                 if critical.isEmpty {
                     VStack(spacing: AppSpacing.lg) {
                         Spacer().frame(height: 60)
-                        Image(systemName: "checkmark.circle").font(.system(size: 40, weight: .light)).foregroundColor(AppColors.success)
+                        Image(systemName: "checkmark.circle").font(AppTypography.emptyStateIcon).foregroundColor(AppColors.success)
                         Text("All stock levels healthy").font(AppTypography.heading3).foregroundColor(AppColors.textPrimaryDark)
                     }
                 } else {
@@ -164,12 +164,12 @@ struct InvAlertsSubview: View {
                             }
                             Spacer()
                             Text(product.stockCount == 0 ? "OUT" : "\(product.stockCount) left")
-                                .font(.system(size: 11, weight: .bold))
+                                .font(AppTypography.statSmall)
                                 .foregroundColor(product.stockCount == 0 ? AppColors.error : AppColors.warning)
                                 .padding(.horizontal, 8).padding(.vertical, 4)
                                 .background((product.stockCount == 0 ? AppColors.error : AppColors.warning).opacity(0.12)).cornerRadius(4)
                             Button(action: {}) {
-                                Text("Request").font(.system(size: 11, weight: .medium)).foregroundColor(AppColors.accent)
+                                Text("Request").font(AppTypography.actionLink).foregroundColor(AppColors.accent)
                             }
                         }
                         .padding(.horizontal, AppSpacing.sm).padding(.vertical, AppSpacing.xs)
@@ -206,13 +206,13 @@ struct InvTransfersSubview: View {
                 Text(sku).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                 HStack(spacing: 4) {
                     Text(from).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
-                    Image(systemName: "arrow.right").font(.system(size: 8)).foregroundColor(AppColors.neutral500)
+                    Image(systemName: "arrow.right").font(AppTypography.arrowInline).foregroundColor(AppColors.neutral500)
                     Text(to).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
                 }
             }
             Spacer()
             Text("×\(qty)").font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
-            Text(status.uppercased()).font(.system(size: 9, weight: .bold)).foregroundColor(color)
+            Text(status.uppercased()).font(AppTypography.nano).foregroundColor(color)
                 .padding(.horizontal, 8).padding(.vertical, 3).background(color.opacity(0.12)).cornerRadius(4)
         }
         .padding(AppSpacing.sm).background(AppColors.backgroundSecondary).cornerRadius(AppSpacing.radiusMedium)
@@ -248,17 +248,17 @@ struct InvFlaggedSubview: View {
                 Text(item).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark).lineLimit(1)
                 Spacer()
                 let sc = severity == "Low" ? AppColors.warning : AppColors.error
-                Text(severity.uppercased()).font(.system(size: 9, weight: .bold)).foregroundColor(sc)
+                Text(severity.uppercased()).font(AppTypography.nano).foregroundColor(sc)
                     .padding(.horizontal, 8).padding(.vertical, 3).background(sc.opacity(0.12)).cornerRadius(4)
             }
             Text(reason).font(AppTypography.bodySmall).foregroundColor(AppColors.textSecondaryDark)
             HStack {
-                Text(flaggedBy).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.purple)
+                Text(flaggedBy).font(AppTypography.micro).foregroundColor(AppColors.purple)
                 Text("•").foregroundColor(AppColors.neutral600)
                 Text(time).font(AppTypography.caption).foregroundColor(AppColors.neutral500)
                 Spacer()
                 Button(action: {}) {
-                    Text("Review").font(.system(size: 11, weight: .semibold)).foregroundColor(AppColors.accent)
+                    Text("Review").font(AppTypography.reviewButton).foregroundColor(AppColors.accent)
                         .padding(.horizontal, 12).padding(.vertical, 5).background(AppColors.accent.opacity(0.12)).cornerRadius(6)
                 }
             }

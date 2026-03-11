@@ -29,7 +29,7 @@ struct LuxuryTextField: View {
                 if let icon = icon {
                     Image(systemName: icon)
                         .foregroundColor(isFocused ? AppColors.accent : AppColors.neutral500)
-                        .font(.system(size: 16))
+                        .font(AppTypography.buttonPrimary)
                         .frame(width: 20)
                 }
 

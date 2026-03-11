@@ -58,13 +58,13 @@ struct ManagerDashboardView: View {
                     HStack(spacing: AppSpacing.sm) {
                         Button(action: {}) {
                             Image(systemName: "bell.badge")
-                                .font(.system(size: 16))
+                                .font(AppTypography.bellIcon)
                                 .foregroundColor(AppColors.textPrimaryDark)
                         }
                         Button(action: { showProfile = true }) {
                             ZStack {
                                 Circle().fill(AppColors.backgroundTertiary).frame(width: 30, height: 30)
-                                Text(managerInitials).font(.system(size: 11, weight: .semibold)).foregroundColor(AppColors.purple)
+                                Text(managerInitials).font(AppTypography.avatarSmall).foregroundColor(AppColors.purple)
                             }
                         }
                     }
@@ -130,9 +130,9 @@ struct ManagerDashboardView: View {
 
     private func salesPill(value: String, label: String, icon: String, color: Color) -> some View {
         VStack(spacing: 4) {
-            Image(systemName: icon).font(.system(size: 14)).foregroundColor(color)
+            Image(systemName: icon).font(AppTypography.alertIcon).foregroundColor(color)
             Text(value).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
-            Text(label).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.textSecondaryDark)
+            Text(label).font(AppTypography.micro).foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, AppSpacing.md)
@@ -166,9 +166,9 @@ struct ManagerDashboardView: View {
     private func kpiCard(icon: String, iconColor: Color, value: String, label: String, badge: String, positive: Bool) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
             HStack {
-                Image(systemName: icon).font(.system(size: 13)).foregroundColor(iconColor)
+                Image(systemName: icon).font(AppTypography.iconSmall).foregroundColor(iconColor)
                 Spacer()
-                Text(badge).font(.system(size: 10, weight: .medium))
+                Text(badge).font(AppTypography.micro)
                     .foregroundColor(positive ? AppColors.success : AppColors.warning)
                     .padding(.horizontal, 6).padding(.vertical, 2)
                     .background((positive ? AppColors.success : AppColors.warning).opacity(0.12))
@@ -190,7 +190,7 @@ struct ManagerDashboardView: View {
             HStack {
                 sectionLabel("ALERTS")
                 Spacer()
-                Text("3").font(.system(size: 10, weight: .bold)).foregroundColor(AppColors.primary)
+                Text("3").font(AppTypography.trendBadge).foregroundColor(AppColors.primary)
                     .padding(.horizontal, 7).padding(.vertical, 3).background(AppColors.warning).cornerRadius(10)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -210,13 +210,13 @@ struct ManagerDashboardView: View {
     private func alertRow(icon: String, color: Color, title: String, detail: String, time: String) -> some View {
         HStack(spacing: AppSpacing.sm) {
             RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 3, height: 40)
-            Image(systemName: icon).font(.system(size: 14)).foregroundColor(color).frame(width: 24)
+            Image(systemName: icon).font(AppTypography.alertIcon).foregroundColor(color).frame(width: 24)
             VStack(alignment: .leading, spacing: 1) {
                 Text(title).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark).lineLimit(1)
                 Text(detail).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark).lineLimit(1)
             }
             Spacer()
-            Text(time).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.neutral500)
+            Text(time).font(AppTypography.micro).foregroundColor(AppColors.neutral500)
         }
         .padding(.horizontal, AppSpacing.sm).padding(.vertical, AppSpacing.xs)
         .background(AppColors.backgroundSecondary).cornerRadius(AppSpacing.radiusMedium)
@@ -251,10 +251,10 @@ struct ManagerDashboardView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: AppSpacing.radiusMedium).fill(AppColors.backgroundTertiary)
                     .frame(width: 120, height: 90)
-                Image(systemName: product.imageName).font(.system(size: 28, weight: .ultraLight)).foregroundColor(AppColors.neutral600)
+                Image(systemName: product.imageName).font(AppTypography.topProductIcon).foregroundColor(AppColors.neutral600)
             }
             Text(product.name).font(AppTypography.caption).foregroundColor(AppColors.textPrimaryDark).lineLimit(1)
-            Text(product.formattedPrice).font(.system(size: 11, weight: .semibold)).foregroundColor(AppColors.accent)
+            Text(product.formattedPrice).font(AppTypography.avatarSmall).foregroundColor(AppColors.accent)
         }
         .frame(width: 120)
     }
@@ -270,11 +270,11 @@ struct ManagerDashboardView: View {
                     VStack(spacing: 4) {
                         ZStack {
                             Circle().fill(staffColor(user.role).opacity(0.15)).frame(width: 44, height: 44)
-                            Text(staffInitials(user.name)).font(.system(size: 13, weight: .semibold)).foregroundColor(staffColor(user.role))
+                            Text(staffInitials(user.name)).font(AppTypography.avatarMedium).foregroundColor(staffColor(user.role))
                         }
-                        Text(user.name.split(separator: " ").first.map(String.init) ?? "").font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.textSecondaryDark)
+                        Text(user.name.split(separator: " ").first.map(String.init) ?? "").font(AppTypography.micro).foregroundColor(AppColors.textSecondaryDark)
                         Text(user.role == .salesAssociate ? "Sales" : "Inv.")
-                            .font(.system(size: 9, weight: .semibold)).foregroundColor(staffColor(user.role))
+                            .font(AppTypography.nano).foregroundColor(staffColor(user.role))
                     }
                     .frame(maxWidth: .infinity)
                 }
@@ -316,8 +316,8 @@ struct ManagerDashboardView: View {
 
     private func actionTile(icon: String, label: String, color: Color) -> some View {
         VStack(spacing: AppSpacing.xs) {
-            Image(systemName: icon).font(.system(size: 22, weight: .light)).foregroundColor(color)
-            Text(label).font(.system(size: 11, weight: .medium)).foregroundColor(AppColors.textSecondaryDark)
+            Image(systemName: icon).font(AppTypography.iconAction).foregroundColor(color)
+            Text(label).font(AppTypography.actionLink).foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity).frame(height: 72)
         .background(AppColors.backgroundSecondary).cornerRadius(AppSpacing.radiusMedium)

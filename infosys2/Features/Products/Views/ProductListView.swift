@@ -73,7 +73,7 @@ struct ProductListView: View {
                                     .font(AppTypography.bodySmall)
                                     .foregroundColor(AppColors.accent)
                                 Image(systemName: "arrow.up.arrow.down")
-                                    .font(.system(size: 12))
+                                    .font(AppTypography.sortIcon)
                                     .foregroundColor(AppColors.accent)
                             }
                         }
@@ -107,7 +107,7 @@ struct ProductListView: View {
                         .frame(height: 180)
 
                     Image(systemName: product.imageName)
-                        .font(.system(size: 36, weight: .light))
+                        .font(AppTypography.iconProductMedium)
                         .foregroundColor(AppColors.neutral600)
 
                     // Wishlist heart
@@ -119,7 +119,7 @@ struct ProductListView: View {
                                 try? modelContext.save()
                             }) {
                                 Image(systemName: product.isWishlisted ? "heart.fill" : "heart")
-                                    .font(.system(size: 14))
+                                    .font(AppTypography.heartIconSmall)
                                     .foregroundColor(product.isWishlisted ? AppColors.error : AppColors.textPrimaryDark)
                                     .padding(8)
                                     .background(.ultraThinMaterial)

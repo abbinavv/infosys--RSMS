@@ -52,7 +52,7 @@ struct HomeView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
                         Image(systemName: "bell")
-                            .font(.system(size: 16))
+                            .font(AppTypography.bellIcon)
                             .foregroundColor(AppColors.textPrimaryDark)
                     }
                 }
@@ -101,7 +101,7 @@ struct HomeView: View {
                         .font(AppTypography.buttonSecondary)
                         .foregroundColor(AppColors.accent)
                     Image(systemName: "arrow.right")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(AppTypography.chevron)
                         .foregroundColor(AppColors.accent)
                 }
             }
@@ -113,7 +113,7 @@ struct HomeView: View {
                 HStack {
                     Spacer()
                     Image(systemName: "diamond.fill")
-                        .font(.system(size: 80, weight: .ultraLight))
+                        .font(AppTypography.iconDecorative)
                         .foregroundColor(AppColors.accent.opacity(0.08))
                         .padding(.trailing, AppSpacing.xl)
                 }
@@ -154,7 +154,7 @@ struct HomeView: View {
                     .frame(width: 64, height: 64)
 
                 Image(systemName: category.icon)
-                    .font(.system(size: 22))
+                    .font(AppTypography.categoryCircleIcon)
                     .foregroundColor(AppColors.accent)
             }
 
@@ -214,7 +214,7 @@ struct HomeView: View {
                         .font(AppTypography.bodySmall)
                         .foregroundColor(AppColors.accent)
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 10, weight: .medium))
+                        .font(AppTypography.iconCompact)
                         .foregroundColor(AppColors.accent)
                 }
             }
@@ -231,7 +231,7 @@ struct HomeView: View {
                         .frame(width: 180, height: 200)
 
                     Image(systemName: product.imageName)
-                        .font(.system(size: 40, weight: .light))
+                        .font(AppTypography.iconProductLarge)
                         .foregroundColor(AppColors.neutral600)
 
                     if product.isLimitedEdition {
@@ -283,7 +283,7 @@ struct HomeView: View {
                     .frame(width: 80, height: 80)
 
                 Image(systemName: product.imageName)
-                    .font(.system(size: 24, weight: .light))
+                    .font(AppTypography.iconProductSmall)
                     .foregroundColor(AppColors.neutral600)
             }
 
@@ -305,7 +305,7 @@ struct HomeView: View {
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .medium))
+                .font(AppTypography.chevron)
                 .foregroundColor(AppColors.neutral600)
         }
         .padding(AppSpacing.cardPadding)

@@ -46,7 +46,7 @@ struct OrganizationView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
                         Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 20))
+                            .font(AppTypography.toolbarIcon)
                             .foregroundColor(AppColors.accent)
                     }
                 }
@@ -87,7 +87,7 @@ struct OrgBoutiquesSubview: View {
                     Text(city).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
                 }
                 Spacer()
-                Text(status.uppercased()).font(.system(size: 9, weight: .bold)).foregroundColor(AppColors.success)
+                Text(status.uppercased()).font(AppTypography.nano).foregroundColor(AppColors.success)
                     .padding(.horizontal, 8).padding(.vertical, 3).background(AppColors.success.opacity(0.12)).cornerRadius(4)
             }
             Divider().background(AppColors.border)
@@ -114,7 +114,7 @@ struct OrgBoutiquesSubview: View {
     private func statPill(value: String, label: String, color: Color) -> some View {
         VStack(spacing: 4) {
             Text(value).font(AppTypography.heading2).foregroundColor(color)
-            Text(label).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.textSecondaryDark)
+            Text(label).font(AppTypography.micro).foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, AppSpacing.sm)
@@ -190,18 +190,18 @@ struct OrgStaffSubview: View {
         HStack(spacing: AppSpacing.sm) {
             ZStack {
                 Circle().fill(roleColor(user.role).opacity(0.15)).frame(width: 40, height: 40)
-                Text(initials(user.name)).font(.system(size: 12, weight: .semibold)).foregroundColor(roleColor(user.role))
+                Text(initials(user.name)).font(AppTypography.editLink).foregroundColor(roleColor(user.role))
             }
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 4) {
                     Text(user.name).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                     if !user.isActive {
-                        Text("INACTIVE").font(.system(size: 8, weight: .bold)).foregroundColor(AppColors.error)
+                        Text("INACTIVE").font(AppTypography.pico).foregroundColor(AppColors.error)
                             .padding(.horizontal, 4).padding(.vertical, 1).background(AppColors.error.opacity(0.12)).cornerRadius(3)
                     }
                 }
                 Text(user.email).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
-                Text(user.role.rawValue).font(.system(size: 10, weight: .semibold)).foregroundColor(roleColor(user.role))
+                Text(user.role.rawValue).font(AppTypography.roleTag).foregroundColor(roleColor(user.role))
             }
             Spacer()
             Menu {
@@ -212,7 +212,7 @@ struct OrgStaffSubview: View {
                     Label(user.isActive ? "Deactivate" : "Reactivate", systemImage: user.isActive ? "person.slash" : "person.badge.plus")
                 }
             } label: {
-                Image(systemName: "ellipsis").font(.system(size: 14)).foregroundColor(AppColors.neutral500)
+                Image(systemName: "ellipsis").font(AppTypography.iconSmall).foregroundColor(AppColors.neutral500)
                     .frame(width: 28, height: AppSpacing.touchTarget)
             }
         }
@@ -274,17 +274,17 @@ struct OrgRolesSubview: View {
     private func roleCard(role: String, color: Color, icon: String, permissions: [String]) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
             HStack(spacing: AppSpacing.sm) {
-                Image(systemName: icon).font(.system(size: 16)).foregroundColor(color)
+                Image(systemName: icon).font(AppTypography.orgIcon).foregroundColor(color)
                 Text(role).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                 Spacer()
                 Button(action: {}) {
-                    Text("Edit").font(.system(size: 12, weight: .medium)).foregroundColor(AppColors.accent)
+                    Text("Edit").font(AppTypography.editLink).foregroundColor(AppColors.accent)
                 }
             }
             Divider().background(AppColors.border)
             ForEach(permissions, id: \.self) { perm in
                 HStack(spacing: AppSpacing.xs) {
-                    Image(systemName: "checkmark").font(.system(size: 10, weight: .bold)).foregroundColor(color)
+                    Image(systemName: "checkmark").font(AppTypography.checkmarkSmall).foregroundColor(color)
                     Text(perm).font(AppTypography.bodySmall).foregroundColor(AppColors.textSecondaryDark)
                 }
             }

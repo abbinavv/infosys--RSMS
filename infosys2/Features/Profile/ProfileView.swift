@@ -80,7 +80,7 @@ struct ProfileView: View {
                         Button(action: { showLogoutConfirmation = true }) {
                             HStack(spacing: AppSpacing.sm) {
                                 Image(systemName: "rectangle.portrait.and.arrow.right")
-                                    .font(.system(size: 16))
+                                    .font(AppTypography.signOutIcon)
                                 Text("Sign Out")
                                     .font(AppTypography.buttonSecondary)
                             }
@@ -108,7 +108,7 @@ struct ProfileView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
                         Image(systemName: "gearshape")
-                            .font(.system(size: 16))
+                            .font(AppTypography.gearIcon)
                             .foregroundColor(AppColors.textPrimaryDark)
                     }
                 }
@@ -138,7 +138,7 @@ struct ProfileView: View {
         Button(action: {}) {
             HStack(spacing: AppSpacing.md) {
                 Image(systemName: icon)
-                    .font(.system(size: 18))
+                    .font(AppTypography.menuIconLarge)
                     .foregroundColor(AppColors.accent)
                     .frame(width: 28)
 
@@ -155,7 +155,7 @@ struct ProfileView: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .medium))
+                    .font(AppTypography.chevron)
                     .foregroundColor(AppColors.neutral600)
             }
             .padding(.vertical, AppSpacing.sm)

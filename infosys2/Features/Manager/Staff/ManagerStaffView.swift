@@ -76,22 +76,22 @@ struct StaffRosterSubview: View {
         HStack(spacing: AppSpacing.md) {
             ZStack {
                 Circle().fill(roleClr(user.role).opacity(0.15)).frame(width: 48, height: 48)
-                Text(initials(user.name)).font(.system(size: 14, weight: .semibold)).foregroundColor(roleClr(user.role))
+                Text(initials(user.name)).font(AppTypography.avatarLarge).foregroundColor(roleClr(user.role))
             }
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 4) {
                     Text(user.name).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                     if !user.isActive {
-                        Text("OFF").font(.system(size: 8, weight: .bold)).foregroundColor(AppColors.neutral500)
+                        Text("OFF").font(AppTypography.pico).foregroundColor(AppColors.neutral500)
                             .padding(.horizontal, 4).padding(.vertical, 1).background(AppColors.neutral500.opacity(0.12)).cornerRadius(3)
                     }
                 }
                 Text(user.email).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
-                Text(user.role.rawValue).font(.system(size: 10, weight: .semibold)).foregroundColor(roleClr(user.role))
+                Text(user.role.rawValue).font(AppTypography.roleTag).foregroundColor(roleClr(user.role))
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
-                Text("On Floor").font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.success)
+                Text("On Floor").font(AppTypography.micro).foregroundColor(AppColors.success)
                 Text("9:00–6:00").font(AppTypography.caption).foregroundColor(AppColors.neutral500)
             }
         }
@@ -117,7 +117,7 @@ struct StaffRosterSubview: View {
     private func rosterStat(value: String, label: String, color: Color) -> some View {
         VStack(spacing: 4) {
             Text(value).font(AppTypography.heading2).foregroundColor(color)
-            Text(label).font(.system(size: 10, weight: .medium)).foregroundColor(AppColors.textSecondaryDark)
+            Text(label).font(AppTypography.micro).foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity).padding(.vertical, AppSpacing.sm)
         .background(AppColors.backgroundSecondary).cornerRadius(AppSpacing.radiusMedium)
@@ -156,7 +156,7 @@ struct StaffShiftsSubview: View {
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
                 Text(shift).font(AppTypography.caption).foregroundColor(AppColors.textPrimaryDark)
-                Text(status.uppercased()).font(.system(size: 9, weight: .bold)).foregroundColor(color)
+                Text(status.uppercased()).font(AppTypography.nano).foregroundColor(color)
                     .padding(.horizontal, 8).padding(.vertical, 3).background(color.opacity(0.12)).cornerRadius(4)
             }
         }

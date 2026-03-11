@@ -60,7 +60,7 @@ struct AdminDashboardView: View {
                     HStack(spacing: AppSpacing.sm) {
                         Button(action: {}) {
                             Image(systemName: "bell.badge")
-                                .font(.system(size: 16))
+                                .font(AppTypography.bellIcon)
                                 .foregroundColor(AppColors.textPrimaryDark)
                         }
                         Button(action: { showProfile = true }) {
@@ -69,7 +69,7 @@ struct AdminDashboardView: View {
                                     .fill(AppColors.backgroundTertiary)
                                     .frame(width: 30, height: 30)
                                 Text(adminInitials)
-                                    .font(.system(size: 11, weight: .semibold))
+                                    .font(AppTypography.avatarSmall)
                                     .foregroundColor(AppColors.accent)
                             }
                         }
@@ -149,11 +149,11 @@ struct AdminDashboardView: View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
             HStack {
                 Image(systemName: icon)
-                    .font(.system(size: 13))
+                    .font(AppTypography.bodySmall)
                     .foregroundColor(iconColor)
                 Spacer()
                 Text(badge)
-                    .font(.system(size: 10, weight: .medium))
+                    .font(AppTypography.micro)
                     .foregroundColor(badgePositive ? AppColors.success : AppColors.warning)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -188,10 +188,10 @@ struct AdminDashboardView: View {
     private func healthPill(icon: String, text: String, color: Color) -> some View {
         HStack(spacing: 4) {
             Image(systemName: icon)
-                .font(.system(size: 10))
+                .font(AppTypography.iconCompact)
                 .foregroundColor(color)
             Text(text)
-                .font(.system(size: 10, weight: .medium))
+                .font(AppTypography.micro)
                 .foregroundColor(AppColors.textSecondaryDark)
         }
         .padding(.horizontal, 10)
@@ -208,7 +208,7 @@ struct AdminDashboardView: View {
                 sectionLabel("ALERTS")
                 Spacer()
                 Text("3")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(AppTypography.nano)
                     .foregroundColor(AppColors.primary)
                     .padding(.horizontal, 7)
                     .padding(.vertical, 3)
@@ -236,7 +236,7 @@ struct AdminDashboardView: View {
                 .frame(width: 3, height: 40)
 
             Image(systemName: icon)
-                .font(.system(size: 14))
+                .font(AppTypography.alertIcon)
                 .foregroundColor(color)
                 .frame(width: 24)
 
@@ -252,7 +252,7 @@ struct AdminDashboardView: View {
             }
             Spacer()
             Text(time)
-                .font(.system(size: 10, weight: .medium))
+                .font(AppTypography.micro)
                 .foregroundColor(AppColors.neutral500)
         }
         .padding(.horizontal, AppSpacing.sm)
@@ -283,10 +283,10 @@ struct AdminDashboardView: View {
     private func actionTile(icon: String, label: String, color: Color) -> some View {
         VStack(spacing: AppSpacing.xs) {
             Image(systemName: icon)
-                .font(.system(size: 22, weight: .light))
+                .font(AppTypography.iconAction)
                 .foregroundColor(color)
             Text(label)
-                .font(.system(size: 11, weight: .medium))
+                .font(AppTypography.actionLink)
                 .foregroundColor(AppColors.textSecondaryDark)
         }
         .frame(maxWidth: .infinity)
@@ -339,7 +339,7 @@ struct AdminDashboardView: View {
                         .foregroundColor(AppColors.textPrimaryDark)
                     Spacer()
                     Text(time)
-                        .font(.system(size: 10))
+                        .font(AppTypography.iconCompact)
                         .foregroundColor(AppColors.neutral500)
                 }
                 Text(detail)
@@ -347,7 +347,7 @@ struct AdminDashboardView: View {
                     .foregroundColor(AppColors.textSecondaryDark)
                     .lineLimit(1)
                 Text(by)
-                    .font(.system(size: 10, weight: .medium))
+                    .font(AppTypography.micro)
                     .foregroundColor(AppColors.purple)
             }
         }

@@ -40,7 +40,7 @@ struct SplashScreenView: View {
 
                         // Inner diamond icon
                         Image(systemName: "diamond.fill")
-                            .font(.system(size: 44, weight: .light))
+                            .font(AppTypography.brandIconSplash)
                             .foregroundStyle(
                                 LinearGradient(
                                     colors: [AppColors.accent, AppColors.accentLight],

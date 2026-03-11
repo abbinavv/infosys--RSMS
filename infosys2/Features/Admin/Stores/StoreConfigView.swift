@@ -43,7 +43,7 @@ struct StoreConfigView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
                         Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 20))
+                            .font(AppTypography.toolbarIcon)
                             .foregroundColor(AppColors.accent)
                     }
                 }
@@ -201,7 +201,7 @@ struct StoreConfigView: View {
                     .fill(AppColors.info.opacity(0.15))
                     .frame(width: 44, height: 44)
                 Image(systemName: "building.2.fill")
-                    .font(.system(size: 18))
+                    .font(AppTypography.catalogIcon)
                     .foregroundColor(AppColors.info)
             }
 

@@ -67,7 +67,7 @@ struct AdminProfileView: View {
                         Button(action: { showLogoutConfirmation = true }) {
                             HStack(spacing: AppSpacing.sm) {
                                 Image(systemName: "rectangle.portrait.and.arrow.right")
-                                    .font(.system(size: 16))
+                                    .font(AppTypography.menuIcon)
                                 Text("Sign Out")
                                     .font(AppTypography.buttonSecondary)
                             }
@@ -89,7 +89,7 @@ struct AdminProfileView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(AppTypography.closeButton)
                             .foregroundColor(AppColors.textPrimaryDark)
                     }
                 }
@@ -143,7 +143,7 @@ struct AdminProfileView: View {
 
                 HStack(spacing: AppSpacing.xs) {
                     Image(systemName: "shield.checkered")
-                        .font(.system(size: 10))
+                        .font(AppTypography.storeIcon)
                     Text("CORPORATE ADMIN")
                         .font(AppTypography.overline)
                         .tracking(2)
@@ -178,7 +178,7 @@ struct AdminProfileView: View {
         Button(action: {}) {
             HStack(spacing: AppSpacing.md) {
                 Image(systemName: icon)
-                    .font(.system(size: 16))
+                    .font(AppTypography.menuIcon)
                     .foregroundColor(AppColors.purple)
                     .frame(width: 28)
 
@@ -194,7 +194,7 @@ struct AdminProfileView: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .medium))
+                    .font(AppTypography.chevron)
                     .foregroundColor(AppColors.neutral600)
             }
             .padding(.vertical, AppSpacing.sm)

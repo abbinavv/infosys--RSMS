@@ -33,7 +33,7 @@ struct ForgotPasswordView: View {
                             .frame(width: 80, height: 80)
 
                         Image(systemName: "key.fill")
-                            .font(.system(size: 28, weight: .light))
+                            .font(AppTypography.keyIcon)
                             .foregroundColor(AppColors.accent)
                             .rotationEffect(.degrees(-45))
                     }
@@ -80,7 +80,7 @@ struct ForgotPasswordView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(AppTypography.closeButton)
                             .foregroundColor(AppColors.textPrimaryDark)
                     }
                 }

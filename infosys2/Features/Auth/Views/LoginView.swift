@@ -28,7 +28,7 @@ struct LoginView: View {
                         // Brand header
                         VStack(spacing: AppSpacing.sm) {
                             Image(systemName: "diamond.fill")
-                                .font(.system(size: 32, weight: .light))
+                                .font(AppTypography.brandIcon)
                                 .foregroundStyle(
                                     LinearGradient(
                                         colors: [AppColors.accent, AppColors.accentLight],

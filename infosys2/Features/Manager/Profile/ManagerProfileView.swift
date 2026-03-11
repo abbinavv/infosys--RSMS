@@ -60,7 +60,7 @@ struct ManagerProfileView: View {
                         // Sign Out
                         Button(action: { showLogoutConfirmation = true }) {
                             HStack(spacing: AppSpacing.sm) {
-                                Image(systemName: "rectangle.portrait.and.arrow.right").font(.system(size: 16))
+                                Image(systemName: "rectangle.portrait.and.arrow.right").font(AppTypography.signOutIcon)
                                 Text("Sign Out").font(AppTypography.buttonSecondary)
                             }
                             .foregroundColor(AppColors.error)
@@ -78,7 +78,7 @@ struct ManagerProfileView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
-                        Image(systemName: "xmark").font(.system(size: 14, weight: .medium)).foregroundColor(AppColors.textPrimaryDark)
+                        Image(systemName: "xmark").font(AppTypography.closeButton).foregroundColor(AppColors.textPrimaryDark)
                     }
                 }
                 ToolbarItem(placement: .principal) {
@@ -108,7 +108,7 @@ struct ManagerProfileView: View {
                 Text(appState.currentUserName).font(AppTypography.heading1).foregroundColor(AppColors.textPrimaryDark)
                 Text(appState.currentUserEmail).font(AppTypography.bodyMedium).foregroundColor(AppColors.textSecondaryDark)
                 HStack(spacing: AppSpacing.xs) {
-                    Image(systemName: "building.2").font(.system(size: 10))
+                    Image(systemName: "building.2").font(AppTypography.storeIcon)
                     Text("BOUTIQUE MANAGER").font(AppTypography.overline).tracking(2)
                 }
                 .foregroundColor(AppColors.purple).padding(.top, AppSpacing.xxs)
@@ -132,7 +132,7 @@ struct ManagerProfileView: View {
 
     private func infoRow(icon: String, title: String, subtitle: String) -> some View {
         HStack(spacing: AppSpacing.md) {
-            Image(systemName: icon).font(.system(size: 16)).foregroundColor(AppColors.accent).frame(width: 28)
+            Image(systemName: icon).font(AppTypography.menuIcon).foregroundColor(AppColors.accent).frame(width: 28)
             VStack(alignment: .leading, spacing: 2) {
                 Text(title).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                 Text(subtitle).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
@@ -145,13 +145,13 @@ struct ManagerProfileView: View {
     private func navRow(icon: String, title: String, subtitle: String) -> some View {
         Button(action: {}) {
             HStack(spacing: AppSpacing.md) {
-                Image(systemName: icon).font(.system(size: 16)).foregroundColor(AppColors.purple).frame(width: 28)
+                Image(systemName: icon).font(AppTypography.menuIcon).foregroundColor(AppColors.purple).frame(width: 28)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title).font(AppTypography.label).foregroundColor(AppColors.textPrimaryDark)
                     Text(subtitle).font(AppTypography.caption).foregroundColor(AppColors.textSecondaryDark)
                 }
                 Spacer()
-                Image(systemName: "chevron.right").font(.system(size: 12, weight: .medium)).foregroundColor(AppColors.neutral600)
+                Image(systemName: "chevron.right").font(AppTypography.chevron).foregroundColor(AppColors.neutral600)
             }
             .padding(.vertical, AppSpacing.sm)
         }
