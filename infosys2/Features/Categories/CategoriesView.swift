@@ -41,7 +41,7 @@ struct CategoriesView: View {
                         // Category grid
                         LazyVGrid(columns: columns, spacing: AppSpacing.md) {
                             ForEach(categories) { category in
-                                NavigationLink(destination: ProductListView(categoryFilter: category.name)) {
+                                NavigationLink(destination: CategoryDetailView(category: category)) {
                                     categoryCard(category)
                                 }
                             }

@@ -136,7 +136,7 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppSpacing.md) {
                     ForEach(categories) { category in
-                        NavigationLink(destination: ProductListView(categoryFilter: category.name)) {
+                        NavigationLink(destination: CategoryDetailView(category: category)) {
                             categoryChip(category)
                         }
                     }

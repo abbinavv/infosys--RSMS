@@ -63,7 +63,9 @@ struct ProfileView: View {
 
                         // Menu items
                         VStack(spacing: 0) {
-                            profileRow(icon: "bag", title: "My Orders", subtitle: "Track your orders")
+                            NavigationLink(destination: OrdersListView()) {
+                                profileRowContent(icon: "bag", title: "My Orders", subtitle: "Track your orders")
+                            }
                             profileRow(icon: "calendar", title: "Appointments", subtitle: "Book a boutique visit")
                             profileRow(icon: "bell", title: "Notifications", subtitle: "Manage preferences")
                             profileRow(icon: "creditcard", title: "Payment Methods", subtitle: "Manage cards")
@@ -136,30 +138,34 @@ struct ProfileView: View {
 
     private func profileRow(icon: String, title: String, subtitle: String) -> some View {
         Button(action: {}) {
-            HStack(spacing: AppSpacing.md) {
-                Image(systemName: icon)
-                    .font(AppTypography.menuIconLarge)
-                    .foregroundColor(AppColors.accent)
-                    .frame(width: 28)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
-                        .font(AppTypography.label)
-                        .foregroundColor(AppColors.textPrimaryDark)
-
-                    Text(subtitle)
-                        .font(AppTypography.caption)
-                        .foregroundColor(AppColors.textSecondaryDark)
-                }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(AppTypography.chevron)
-                    .foregroundColor(AppColors.neutral600)
-            }
-            .padding(.vertical, AppSpacing.sm)
+            profileRowContent(icon: icon, title: title, subtitle: subtitle)
         }
+    }
+
+    private func profileRowContent(icon: String, title: String, subtitle: String) -> some View {
+        HStack(spacing: AppSpacing.md) {
+            Image(systemName: icon)
+                .font(AppTypography.menuIconLarge)
+                .foregroundColor(AppColors.accent)
+                .frame(width: 28)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(AppTypography.label)
+                    .foregroundColor(AppColors.textPrimaryDark)
+
+                Text(subtitle)
+                    .font(AppTypography.caption)
+                    .foregroundColor(AppColors.textSecondaryDark)
+            }
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(AppTypography.chevron)
+                .foregroundColor(AppColors.neutral600)
+        }
+        .padding(.vertical, AppSpacing.sm)
     }
 }
 

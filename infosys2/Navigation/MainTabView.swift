@@ -10,6 +10,12 @@ import SwiftData
 
 struct MainTabView: View {
     @State private var selectedTab = 0
+    @Environment(AppState.self) private var appState
+    @Query private var allCartItems: [CartItem]
+
+    private var cartBadgeCount: Int {
+        allCartItems.filter { $0.customerEmail == appState.currentUserEmail }.count
+    }
 
     init() {
         // Style the tab bar
@@ -49,19 +55,27 @@ struct MainTabView: View {
                 }
                 .tag(1)
 
-            WishlistView()
+            CartView()
                 .tabItem {
-                    Image(systemName: selectedTab == 2 ? "heart.fill" : "heart")
-                    Text("Wishlist")
+                    Image(systemName: selectedTab == 2 ? "bag.fill" : "bag")
+                    Text("Bag")
                 }
                 .tag(2)
+                .badge(cartBadgeCount > 0 ? cartBadgeCount : 0)
+
+            WishlistView()
+                .tabItem {
+                    Image(systemName: selectedTab == 3 ? "heart.fill" : "heart")
+                    Text("Wishlist")
+                }
+                .tag(3)
 
             ProfileView()
                 .tabItem {
-                    Image(systemName: selectedTab == 3 ? "person.fill" : "person")
+                    Image(systemName: selectedTab == 4 ? "person.fill" : "person")
                     Text("Profile")
                 }
-                .tag(3)
+                .tag(4)
         }
     }
 }
