@@ -11,6 +11,9 @@ import SwiftData
 struct ProductDetailView: View {
     @Bindable var product: Product
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppState.self) private var appState
+    @Query private var allCartItems: [CartItem]
+    @State private var addedToBag = false
 
     var body: some View {
         ZStack {
@@ -123,9 +126,37 @@ struct ProductDetailView: View {
 
                             detailRow(label: "Brand", value: product.brand)
                             detailRow(label: "Category", value: product.categoryName)
+                            if !product.productTypeName.isEmpty {
+                                detailRow(label: "Type", value: product.productTypeName)
+                            }
+                            if !product.sku.isEmpty {
+                                detailRow(label: "SKU", value: product.sku)
+                            }
+                            if !product.material.isEmpty {
+                                detailRow(label: "Material", value: product.material)
+                            }
+                            if !product.countryOfOrigin.isEmpty {
+                                detailRow(label: "Origin", value: product.countryOfOrigin)
+                            }
                             detailRow(label: "Availability", value: product.stockCount > 0 ? "Available" : "Sold Out")
                             if product.isLimitedEdition {
                                 detailRow(label: "Collection", value: "Limited Edition")
+                            }
+                        }
+
+                        // Specifications (from attributes JSON)
+                        if !product.parsedAttributes.isEmpty {
+                            GoldDivider()
+
+                            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                                Text("SPECIFICATIONS")
+                                    .font(AppTypography.overline)
+                                    .tracking(2)
+                                    .foregroundColor(AppColors.accent)
+
+                                ForEach(product.parsedAttributes.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                                    detailRow(label: key.capitalized, value: value)
+                                }
                             }
                         }
 
@@ -156,10 +187,12 @@ struct ProductDetailView: View {
                             .cornerRadius(AppSpacing.radiusMedium)
                     }
 
-                    // Add to bag (placeholder)
-                    PrimaryButton(title: "Add to Bag") {
-                        // Future cart feature
+                    // Add to bag
+                    PrimaryButton(title: addedToBag ? "Added to Bag ✓" : (product.stockCount > 0 ? "Add to Bag" : "Out of Stock")) {
+                        guard product.stockCount > 0, !addedToBag else { return }
+                        addProductToCart()
                     }
+                    .opacity(product.stockCount > 0 ? 1.0 : 0.5)
                 }
                 .padding(.horizontal, AppSpacing.screenHorizontal)
                 .padding(.vertical, AppSpacing.md)
@@ -170,6 +203,33 @@ struct ProductDetailView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func addProductToCart() {
+        let email = appState.currentUserEmail
+        // Check if product already in cart — increment quantity
+        if let existing = allCartItems.first(where: { $0.customerEmail == email && $0.productId == product.id }) {
+            existing.quantity += 1
+        } else {
+            let item = CartItem(
+                customerEmail: email,
+                productId: product.id,
+                productName: product.name,
+                productImageName: product.imageName,
+                productBrand: product.brand,
+                unitPrice: product.price
+            )
+            modelContext.insert(item)
+        }
+        try? modelContext.save()
+
+        withAnimation(.spring(response: 0.3)) {
+            addedToBag = true
+        }
+        // Reset after 2 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            withAnimation { addedToBag = false }
+        }
     }
 
     private func detailRow(label: String, value: String) -> some View {
@@ -192,12 +252,14 @@ struct ProductDetailView: View {
             brand: "Maison Luxe",
             description: "Timeless quilted leather bag with signature gold chain strap.",
             price: 4850,
-            categoryName: "Handbags",
+            categoryName: "Leather Goods",
             imageName: "bag.fill",
             isLimitedEdition: true,
             isFeatured: true,
             rating: 4.9,
-            stockCount: 3
+            stockCount: 3,
+            productTypeName: "Handbags",
+            attributes: "{\"leather\":\"Lambskin\",\"hardware\":\"Gold-Tone\"}"
         ))
     }
     .modelContainer(for: Product.self, inMemory: true)

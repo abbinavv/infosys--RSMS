@@ -18,6 +18,14 @@ struct infosys2App: App {
             User.self,
             Product.self,
             Category.self,
+            Order.self,
+            CartItem.self,
+            ClientProfile.self,
+            Appointment.self,
+            AfterSalesTicket.self,
+            Transfer.self,
+            Event.self,
+            AppNotification.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

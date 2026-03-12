@@ -10,6 +10,7 @@ import SwiftData
 
 struct ProductListView: View {
     let categoryFilter: String
+    var productTypeFilter: String? = nil
     @Query private var allProducts: [Product]
     @Environment(\.modelContext) private var modelContext
 
@@ -23,7 +24,10 @@ struct ProductListView: View {
     }
 
     private var filteredProducts: [Product] {
-        let filtered = allProducts.filter { $0.categoryName == categoryFilter }
+        var filtered = allProducts.filter { $0.categoryName == categoryFilter }
+        if let typeFilter = productTypeFilter {
+            filtered = filtered.filter { $0.productTypeName == typeFilter }
+        }
         switch sortOption {
         case .featured:
             return filtered.sorted { $0.isFeatured && !$1.isFeatured }
@@ -94,7 +98,7 @@ struct ProductListView: View {
                 .padding(.bottom, AppSpacing.xxxl)
             }
         }
-        .navigationTitle(categoryFilter)
+        .navigationTitle(productTypeFilter ?? categoryFilter)
         .navigationBarTitleDisplayMode(.large)
     }
 
@@ -182,7 +186,7 @@ struct ProductListView: View {
 
 #Preview {
     NavigationStack {
-        ProductListView(categoryFilter: "Handbags")
+        ProductListView(categoryFilter: "Leather Goods")
     }
     .modelContainer(for: [Product.self, Category.self], inMemory: true)
 }

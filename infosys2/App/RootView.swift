@@ -36,6 +36,10 @@ struct RootView: View {
             case .managerDashboard:
                 ManagerTabView()
                     .transition(.opacity)
+
+            case .salesDashboard:
+                SalesTabView()
+                    .transition(.opacity)
             }
         }
         .animation(.easeInOut(duration: 0.5), value: appState.currentFlow)

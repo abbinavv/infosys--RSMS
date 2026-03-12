@@ -13,7 +13,8 @@ enum AppFlow {
     case authentication
     case main              // Customer-facing tab bar
     case adminDashboard    // Corporate Admin enterprise panel
-    case managerDashboard  // Boutique Manager store operations panel
+    case managerDashboard  // Boutique Manager & Inventory Controller panel
+    case salesDashboard    // Sales Associate & After-Sales Specialist panel
 }
 
 @Observable
@@ -59,9 +60,11 @@ class AppState {
             switch role {
             case .corporateAdmin:
                 currentFlow = .adminDashboard
-            case .boutiqueManager:
+            case .boutiqueManager, .inventoryController:
                 currentFlow = .managerDashboard
-            default:
+            case .salesAssociate, .serviceTechnician:
+                currentFlow = .salesDashboard
+            case .customer:
                 currentFlow = .main
             }
         }
