@@ -43,5 +43,11 @@ struct RootView: View {
             }
         }
         .animation(.easeInOut(duration: 0.5), value: appState.currentFlow)
+        .task {
+            // Attempt to restore a live Supabase session on every launch
+            if appState.currentFlow == .splash {
+                await appState.tryRestoreSession()
+            }
+        }
     }
 }

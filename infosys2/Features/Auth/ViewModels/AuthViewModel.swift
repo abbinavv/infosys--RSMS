@@ -2,25 +2,30 @@
 //  AuthViewModel.swift
 //  infosys2
 //
-//  ViewModel handling login, signup, and forgot password logic.
+//  ViewModel handling login, signup, and forgot password — powered by Supabase Auth.
 //
 
 import SwiftUI
-import SwiftData
 
 @Observable
 class AuthViewModel {
+
+    // MARK: - Login fields
     var loginEmail: String = ""
     var loginPassword: String = ""
 
-    var signUpName: String = ""
+    // MARK: - Sign up fields (customers only)
+    var signUpFirstName: String = ""
+    var signUpLastName: String = ""
     var signUpEmail: String = ""
     var signUpPhone: String = ""
     var signUpPassword: String = ""
     var signUpConfirmPassword: String = ""
 
+    // MARK: - Forgot password
     var resetEmail: String = ""
 
+    // MARK: - UI state
     var errorMessage: String = ""
     var showError: Bool = false
     var isLoading: Bool = false
@@ -29,92 +34,74 @@ class AuthViewModel {
     // MARK: - Validation
 
     var isLoginValid: Bool {
-        !loginEmail.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !loginPassword.isEmpty
+        !loginEmail.trimmingCharacters(in: .whitespaces).isEmpty && !loginPassword.isEmpty
     }
 
     var isSignUpValid: Bool {
-        !signUpName.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !signUpFirstName.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !signUpLastName.trimmingCharacters(in: .whitespaces).isEmpty &&
         !signUpEmail.trimmingCharacters(in: .whitespaces).isEmpty &&
         !signUpPassword.isEmpty &&
         signUpPassword == signUpConfirmPassword &&
-        signUpPassword.count >= 6
+        signUpPassword.count >= 8
     }
 
     var isResetValid: Bool {
-        !resetEmail.trimmingCharacters(in: .whitespaces).isEmpty &&
-        resetEmail.contains("@")
+        let e = resetEmail.trimmingCharacters(in: .whitespaces)
+        return !e.isEmpty && e.contains("@")
     }
 
     // MARK: - Login
 
-    func login(modelContext: ModelContext, appState: AppState) {
+    func login(appState: AppState) {
         guard isLoginValid else {
-            showErrorMessage("Please enter valid credentials.")
+            showErrorMessage("Please enter your email and password.")
             return
         }
-
         isLoading = true
+        let email    = loginEmail.trimmingCharacters(in: .whitespaces).lowercased()
+        let password = loginPassword
 
-        // Simulate network delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let self = self else { return }
-            self.isLoading = false
-
-            let email = self.loginEmail.trimmingCharacters(in: .whitespaces).lowercased()
-
+        Task { @MainActor in
+            defer { isLoading = false }
             do {
-                // Fetch ALL users and filter in-memory.
-                // (#Predicate with captured local variables silently fails in SwiftData)
-                let descriptor = FetchDescriptor<User>()
-                let allUsers = try modelContext.fetch(descriptor)
-                let matchedUser = allUsers.first { $0.email.lowercased() == email }
-
-                if let user = matchedUser {
-                    if user.passwordHash == self.loginPassword {
-                        appState.login(name: user.name, email: user.email, role: user.role)
-                    } else {
-                        self.showErrorMessage("Invalid password. Please try again.")
-                    }
-                } else {
-                    self.showErrorMessage("No account found with this email. Please check your credentials or create an account.")
-                }
+                let profile = try await AuthService.shared.signIn(email: email, password: password)
+                appState.login(profile: profile)
             } catch {
-                self.showErrorMessage("An error occurred. Please try again.")
+                showErrorMessage(friendlyError(error))
             }
         }
     }
 
-    // MARK: - Sign Up
+    // MARK: - Sign Up (Customers)
 
-    func signUp(modelContext: ModelContext, appState: AppState) {
+    func signUp(appState: AppState) {
         guard isSignUpValid else {
             if signUpPassword != signUpConfirmPassword {
                 showErrorMessage("Passwords do not match.")
-            } else if signUpPassword.count < 6 {
-                showErrorMessage("Password must be at least 6 characters.")
+            } else if signUpPassword.count < 8 {
+                showErrorMessage("Password must be at least 8 characters.")
             } else {
-                showErrorMessage("Please fill in all fields.")
+                showErrorMessage("Please fill in all required fields.")
             }
             return
         }
-
         isLoading = true
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let self = self else { return }
-            self.isLoading = false
-
-            let newUser = User(
-                name: self.signUpName.trimmingCharacters(in: .whitespaces),
-                email: self.signUpEmail.trimmingCharacters(in: .whitespaces).lowercased(),
-                phone: self.signUpPhone.trimmingCharacters(in: .whitespaces),
-                passwordHash: self.signUpPassword,
-                role: .customer
-            )
-
-            modelContext.insert(newUser)
-            appState.login(name: newUser.name, email: newUser.email, role: newUser.role)
+        Task { @MainActor in
+            defer { isLoading = false }
+            do {
+                let profile = try await AuthService.shared.signUp(
+                    firstName: signUpFirstName.trimmingCharacters(in: .whitespaces),
+                    lastName:  signUpLastName.trimmingCharacters(in: .whitespaces),
+                    email:     signUpEmail.trimmingCharacters(in: .whitespaces).lowercased(),
+                    phone:     signUpPhone.trimmingCharacters(in: .whitespaces),
+                    password:  signUpPassword
+                )
+                appState.login(profile: profile)
+            } catch {
+                showErrorMessage(friendlyError(error))
+            }
         }
     }
 
@@ -125,20 +112,38 @@ class AuthViewModel {
             showErrorMessage("Please enter a valid email address.")
             return
         }
-
         isLoading = true
+        let email = resetEmail.trimmingCharacters(in: .whitespaces).lowercased()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-            guard let self = self else { return }
-            self.isLoading = false
-            self.showResetSuccess = true
+        Task { @MainActor in
+            defer { isLoading = false }
+            do {
+                try await AuthService.shared.resetPassword(email: email)
+                showResetSuccess = true
+            } catch {
+                showErrorMessage(friendlyError(error))
+            }
         }
     }
 
-    // MARK: - Error Handling
+    // MARK: - Helpers
 
     private func showErrorMessage(_ message: String) {
         errorMessage = message
         showError = true
+    }
+
+    private func friendlyError(_ error: Error) -> String {
+        let msg = error.localizedDescription.lowercased()
+        if msg.contains("invalid login") || msg.contains("invalid credentials") || msg.contains("email not confirmed") {
+            return "Invalid email or password. Please try again."
+        }
+        if msg.contains("network") || msg.contains("offline") || msg.contains("connection") {
+            return "No internet connection. Please check your network."
+        }
+        if msg.contains("rate limit") || msg.contains("too many") {
+            return "Too many attempts. Please wait a moment and try again."
+        }
+        return error.localizedDescription
     }
 }

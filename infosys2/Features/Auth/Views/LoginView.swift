@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct LoginView: View {
     @Environment(AppState.self) var appState
-    @Environment(\.modelContext) private var modelContext
     @State private var viewModel = AuthViewModel()
 
     @State private var showSignUp = false
@@ -92,7 +90,7 @@ struct LoginView: View {
                             title: "Sign In",
                             isLoading: viewModel.isLoading
                         ) {
-                            viewModel.login(modelContext: modelContext, appState: appState)
+                            viewModel.login(appState: appState)
                         }
                         .padding(.horizontal, AppSpacing.screenHorizontal)
                         .padding(.top, AppSpacing.xxl)
@@ -154,5 +152,4 @@ struct LoginView: View {
 #Preview {
     LoginView()
         .environment(AppState())
-        .modelContainer(for: User.self, inMemory: true)
 }

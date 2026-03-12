@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct CustomerSignUpView: View {
     @Environment(AppState.self) var appState
-    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel = AuthViewModel()
 
@@ -38,8 +36,14 @@ struct CustomerSignUpView: View {
                         // Input fields
                         VStack(spacing: AppSpacing.xl) {
                             LuxuryTextField(
-                                placeholder: "Full Name",
-                                text: $viewModel.signUpName,
+                                placeholder: "First Name",
+                                text: $viewModel.signUpFirstName,
+                                icon: "person"
+                            )
+
+                            LuxuryTextField(
+                                placeholder: "Last Name",
+                                text: $viewModel.signUpLastName,
                                 icon: "person"
                             )
 
@@ -77,7 +81,7 @@ struct CustomerSignUpView: View {
                         HStack {
                             Image(systemName: "info.circle")
                                 .font(AppTypography.infoIcon)
-                            Text("Minimum 6 characters")
+                            Text("Minimum 8 characters")
                                 .font(AppTypography.caption)
                         }
                         .foregroundColor(AppColors.neutral500)
@@ -90,7 +94,7 @@ struct CustomerSignUpView: View {
                             title: "Create Account",
                             isLoading: viewModel.isLoading
                         ) {
-                            viewModel.signUp(modelContext: modelContext, appState: appState)
+                            viewModel.signUp(appState: appState)
                         }
                         .padding(.horizontal, AppSpacing.screenHorizontal)
                         .padding(.top, AppSpacing.xxl)
@@ -111,7 +115,6 @@ struct CustomerSignUpView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
-                            .font(AppTypography.closeButton)
                             .foregroundColor(AppColors.textPrimaryDark)
                     }
                 }
@@ -128,5 +131,4 @@ struct CustomerSignUpView: View {
 #Preview {
     CustomerSignUpView()
         .environment(AppState())
-        .modelContainer(for: User.self, inMemory: true)
 }
