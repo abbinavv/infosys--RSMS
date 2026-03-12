@@ -50,14 +50,12 @@ final class AuthService {
         password: String
     ) async throws -> UserDTO {
         // 1. Create Auth account
-        let session = try await client.auth.signUp(
+        let authResponse = try await client.auth.signUp(
             email: email,
             password: password
         )
 
-        guard let authUser = session.user else {
-            throw AuthError.signUpFailed
-        }
+        let authUser = authResponse.user
 
         // 2. Insert profile row
         let insert = UserInsertDTO(
