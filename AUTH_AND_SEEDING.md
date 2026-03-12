@@ -15,8 +15,59 @@
 | `AuthViewModel.swift` | ✅ Built | Login / SignUp / ForgotPassword — Supabase-powered |
 | `AppState.swift` | ✅ Built | Role-based flow routing + session restore |
 | Storage Bucket | ✅ Created | `product-images` (public) — images NOT yet uploaded |
-| **Database Seeding** | ❌ **NOT DONE** | All 13 tables are empty (`[]`) |
-| **Supabase Auth Users** | ❌ **NOT DONE** | No staff accounts created in Auth |
+| **Database Seeding** | ⏳ **CHECK** | Run `seed.sql` if tables are empty |
+| **Supabase Auth Users** | ⏳ **CHECK** | Must create 8 Auth users in Dashboard |
+| **UUID Sync** | ⏳ **CHECK** | Run `complete_setup.sql` Section 3 to auto-sync |
+| **RLS Policies** | ⏳ **CHECK** | Run `complete_setup.sql` Section 4 for policies |
+
+---
+
+## 🚨 QUICK FIX CHECKLIST (If Auth Not Working)
+
+**If login fails, work through these steps in order:**
+
+### Step A: Check if database is seeded
+```sql
+-- Run this in Supabase SQL Editor:
+SELECT 'users' AS tbl, COUNT(*) FROM users;
+```
+- If count = 0 → Run `seed.sql` first
+- If count = 8 → Proceed to Step B
+
+### Step B: Check if Auth users exist
+Go to **Supabase Dashboard → Authentication → Users**
+- If empty → Create 8 Auth users (see list in PART 2 below)
+- If 8 users exist → Proceed to Step C
+
+### Step C: Check UUID match
+```sql
+-- Run this to compare users table with auth.users:
+SELECT 
+  u.email, 
+  u.id as profile_id,
+  au.id as auth_id,
+  CASE WHEN u.id = au.id THEN '✅ Match' ELSE '❌ MISMATCH' END as status
+FROM users u
+LEFT JOIN auth.users au ON u.email = au.email
+ORDER BY u.email;
+```
+- If any show `❌ MISMATCH` → Run `update_user_uuids.sql` with correct UUIDs
+- If all show `✅ Match` → Proceed to Step D
+
+### Step D: Check RLS policies
+```sql
+-- Run this to see existing policies:
+SELECT tablename, policyname FROM pg_policies WHERE schemaname = 'public' AND tablename = 'users';
+```
+- If empty or missing "Users can read own profile" → Run `setup_auth.sql`
+
+### Step E: Test login
+Use these credentials:
+```
+Email:    admin@maisonluxe.in
+Password: Admin@1234
+```
+Should route to Admin Dashboard.
 
 ---
 

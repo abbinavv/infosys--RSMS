@@ -1,5 +1,4 @@
-//
-//  HomeView.swift
+////  HomeView.swift
 //  infosys2
 //
 //  Home screen with hero banner, featured products, and category strip.

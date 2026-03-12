@@ -134,6 +134,11 @@ class AuthViewModel {
     }
 
     private func friendlyError(_ error: Error) -> String {
+        // Handle our custom auth errors
+        if let authError = error as? AuthError {
+            return authError.errorDescription ?? "Authentication failed."
+        }
+
         let msg = error.localizedDescription.lowercased()
         if msg.contains("invalid login") || msg.contains("invalid credentials") || msg.contains("email not confirmed") {
             return "Invalid email or password. Please try again."
@@ -143,6 +148,9 @@ class AuthViewModel {
         }
         if msg.contains("rate limit") || msg.contains("too many") {
             return "Too many attempts. Please wait a moment and try again."
+        }
+        if msg.contains("not found") || msg.contains("no rows") {
+            return "Account profile not found. Please contact your administrator."
         }
         return error.localizedDescription
     }

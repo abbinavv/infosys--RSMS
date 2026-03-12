@@ -36,12 +36,13 @@ ON CONFLICT (id) DO NOTHING;
 
 -- ─────────────────────────────────────────────
 -- 4. TAX RATES (India GST)
+-- NOTE: rate column is NUMERIC(5,4) — store as decimal (0.28 = 28%)
 -- ─────────────────────────────────────────────
 INSERT INTO tax_rates (tax_category_id, country, rate, label, is_active) VALUES
-  ('d1000000-0000-4000-8000-000000000001', 'IN', 28.0, 'GST 28% — Luxury Goods',    true),
-  ('d1000000-0000-4000-8000-000000000002', 'IN',  3.0, 'GST 3% — Gold Jewellery',   true),
-  ('d1000000-0000-4000-8000-000000000003', 'IN', 18.0, 'GST 18% — Watches',         true),
-  ('d1000000-0000-4000-8000-000000000004', 'IN', 18.0, 'GST 18% — Accessories',     true)
+  ('d1000000-0000-4000-8000-000000000001', 'IN', 0.28, 'GST 28% — Luxury Goods',    true),
+  ('d1000000-0000-4000-8000-000000000002', 'IN', 0.03, 'GST 3% — Gold Jewellery',   true),
+  ('d1000000-0000-4000-8000-000000000003', 'IN', 0.18, 'GST 18% — Watches',         true),
+  ('d1000000-0000-4000-8000-000000000004', 'IN', 0.18, 'GST 18% — Accessories',     true)
 ON CONFLICT DO NOTHING;
 
 -- ─────────────────────────────────────────────
